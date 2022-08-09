@@ -7,3 +7,4 @@ for i in range(len(my_list)):
         my_list[i-1] = my_list[i]
     print(my_list[i])
 print(my_list)
+
