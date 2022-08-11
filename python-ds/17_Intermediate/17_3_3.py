@@ -29,5 +29,3 @@ for i in total_msg:
 print('Полученное сообщение: ', total_msg)
 print('Кол-во ошибок в сообщении: ', total_errors)
 print('Кол-во потерянных пакетов: ', error_files)
-
-
