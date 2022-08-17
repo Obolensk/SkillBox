@@ -1,47 +1,59 @@
 # TODO здесь писать код
 
 # N = int(input('Кол-во человек: '))
-# K = int(input('Какое число в считалке? '))
 N = 5
+# K = int(input('Какое число в считалке? '))
 K = 7
-
-print('Значит, выбывает каждый ', K,'-й человек')
-
+print('Значит, выбывает каждый', K, '-й человек')
 list = []
-count = 0
+first = 0
 
 for i in range(N):
     list.append(i+1)
 
-while len(list) > 1:
-    a = 0
+if K > len(list) - first:
     print()
-    print('Текущий круг людей: ', list)
-    rem = K % len(list)
-    if len(list) == N:
-        print('Начало счёта с номера', list[a])
-        # if N > K:
-        #     rem = N % K
-        #     print('Выбывает человек под номером ', list[rem-1])
-        # else:
-        print('Выбывает человек под номером ', list[rem-1])
-        list.pop(rem-1)
-        a = rem
-    else:
-        print('Начало счёта с номера', list[a+1])
-        # if N > K:
-        #     rem = N % K
-        #     print('Выбывает человек под номером ', list[rem-1])
-        # else:
-        print('Выбывает человек под номером ', list[rem])
-        x = list.index(list[rem])
-        print('x', x)
-        print('a', a)
-        list.pop(rem)
-        a = rem
+    print('1_Текущий круг людей:', list)
+    print('1_Начало счёта с номера', list[first - len(list)])
+    print('1_Выбывает человек под номером', list[K % len(list) - 1 + 0])
+    print()
+
+    first = K % len(list) - 1
+    list.pop(K % len(list) - 1 + 0) #!!! i
+    print('2_Текущий круг людей:', list)
+    print('2_Начало счёта с номера', list[first - len(list)])
+    print('2_Выбывает человек под номером', list[K % len(list) - 1 + 1])
+    print()
+
+    first = K % len(list) - 1 + 1
+    list.pop(K % len(list) - 1 + 1) #!!! i
+    print('3_Текущий круг людей:', list)
+    print('3_Начало счёта с номера', list[first - len(list)])
+    print('3_Выбывает человек под номером', list[K % len(list) - 1]) #!!!! OK
+    print()
+
+    first = K % len(list) - 1
+    list.pop(K % len(list) - 1)
+    print('4_Текущий круг людей:', list)
+    print('4_Начало счёта с номера', list[first])
+    print('4_Выбывает человек под номером', list[K % len(list) - 1]) #!!!! OK
 
 
 
-
-print()
-print('Остался человек под номером', list[0])
+#
+# N - количество человек
+# К - счет на выбывание
+# С - длина списка - элемент с которого начинаем счет
+# H - элемент с которого начинаем счет
+# счет
+# Алгоритм решения:
+# 1. Сформировать список
+# 2. Начинаем с первого элемента (Н = 0)
+# 3. Если K > С, то выбывает (K-Н)-ый человек
+# 4. В противном случае выбывает K+С-ый человек
+# 5. И сразу начинаем считать с элемента с таким же индексом, как и тот которого удалили
+# 6.
+# 7.
+# 8.
+# 9.
+#
