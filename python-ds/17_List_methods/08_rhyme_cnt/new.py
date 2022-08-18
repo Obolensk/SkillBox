@@ -1,59 +1,35 @@
-# TODO здесь писать код
 
-# N = int(input('Кол-во человек: '))
+
+# TODO здесь писать код
 N = 5
 # K = int(input('Какое число в считалке? '))
 K = 7
 print('Значит, выбывает каждый', K, '-й человек')
 list = []
-first = 0
+# i = 0
+s = 0
 
 for i in range(N):
     list.append(i+1)
 
-if K > len(list) - first:
+# print(list)
+
+for i in list:
+    for a in range(K):
+        s = a
+        if a >= len(list):
+            s = a - len(list)
+        print(list[s])
+        s += 1
     print()
-    print('1_Текущий круг людей:', list)
-    print('1_Начало счёта с номера', list[first - len(list)])
-    print('1_Выбывает человек под номером', list[K % len(list) - 1 + 0])
-    print()
-
-    first = K % len(list) - 1
-    list.pop(K % len(list) - 1 + 0) #!!! i
-    print('2_Текущий круг людей:', list)
-    print('2_Начало счёта с номера', list[first - len(list)])
-    print('2_Выбывает человек под номером', list[K % len(list) - 1 + 1])
-    print()
-
-    first = K % len(list) - 1 + 1
-    list.pop(K % len(list) - 1 + 1) #!!! i
-    print('3_Текущий круг людей:', list)
-    print('3_Начало счёта с номера', list[first - len(list)])
-    print('3_Выбывает человек под номером', list[K % len(list) - 1]) #!!!! OK
-    print()
-
-    first = K % len(list) - 1
-    list.pop(K % len(list) - 1)
-    print('4_Текущий круг людей:', list)
-    print('4_Начало счёта с номера', list[first])
-    print('4_Выбывает человек под номером', list[K % len(list) - 1]) #!!!! OK
+    print('1_Выбывает человек под номером', list[s-1])
+    list.pop(s-1)
+    print(list)
+    print('1_Начало счёта с номера', list[s-1])
 
 
-
-#
-# N - количество человек
-# К - счет на выбывание
-# С - длина списка - элемент с которого начинаем счет
-# H - элемент с которого начинаем счет
-# счет
-# Алгоритм решения:
-# 1. Сформировать список
-# 2. Начинаем с первого элемента (Н = 0)
-# 3. Если K > С, то выбывает (K-Н)-ый человек
-# 4. В противном случае выбывает K+С-ый человек
-# 5. И сразу начинаем считать с элемента с таким же индексом, как и тот которого удалили
-# 6.
-# 7.
-# 8.
-# 9.
-#
+    # print('1_Выбывает человек под номером', list[s-1]+i)
+    # list.remove(list[s-1]+i)
+    # print(list)
+    # print('1_Начало счёта с номера', list[s-1]+i)
+    # print()
