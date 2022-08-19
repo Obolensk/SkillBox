@@ -1,59 +1,20 @@
 # TODO здесь писать код
 
-# N = int(input('Кол-во человек: '))
-N = 5
-# K = int(input('Какое число в считалке? '))
-K = 7
-print('Значит, выбывает каждый', K, '-й человек')
-list = []
-first = 0
+people_cnt = int(input('Кол-во человек: '))
+drop_number = int(input('Какое число в считалке? '))
+print('Значит, выбывает каждый', drop_number, 'человек')
 
-for i in range(N):
-    list.append(i+1)
+people_list = []
+for i_num in range(1, people_cnt + 1):
+    people_list.append(i_num)
+index_del = 0
 
-if K > len(list) - first:
-    print()
-    print('1_Текущий круг людей:', list)
-    print('1_Начало счёта с номера', list[first - len(list)])
-    print('1_Выбывает человек под номером', list[K % len(list) - 1 + 0])
-    print()
+while len(people_list) > 1:
+    print('Текущий круг людей:', people_list)
+    index_start = index_del % len(people_list)
+    print('Начало счёта с номера', people_list[index_start])
+    index_del = (index_start + drop_number - 1) % len(people_list)
+    print('Выбывает человек под номером', people_list[index_del])
+    people_list.remove(people_list[index_del])
 
-    first = K % len(list) - 1
-    list.pop(K % len(list) - 1 + 0) #!!! i
-    print('2_Текущий круг людей:', list)
-    print('2_Начало счёта с номера', list[first - len(list)])
-    print('2_Выбывает человек под номером', list[K % len(list) - 1 + 1])
-    print()
-
-    first = K % len(list) - 1 + 1
-    list.pop(K % len(list) - 1 + 1) #!!! i
-    print('3_Текущий круг людей:', list)
-    print('3_Начало счёта с номера', list[first - len(list)])
-    print('3_Выбывает человек под номером', list[K % len(list) - 1]) #!!!! OK
-    print()
-
-    first = K % len(list) - 1
-    list.pop(K % len(list) - 1)
-    print('4_Текущий круг людей:', list)
-    print('4_Начало счёта с номера', list[first])
-    print('4_Выбывает человек под номером', list[K % len(list) - 1]) #!!!! OK
-
-
-
-#
-# N - количество человек
-# К - счет на выбывание
-# С - длина списка - элемент с которого начинаем счет
-# H - элемент с которого начинаем счет
-# счет
-# Алгоритм решения:
-# 1. Сформировать список
-# 2. Начинаем с первого элемента (Н = 0)
-# 3. Если K > С, то выбывает (K-Н)-ый человек
-# 4. В противном случае выбывает K+С-ый человек
-# 5. И сразу начинаем считать с элемента с таким же индексом, как и тот которого удалили
-# 6.
-# 7.
-# 8.
-# 9.
-#
+print('\nОстался человек под номером', people_list[0])
