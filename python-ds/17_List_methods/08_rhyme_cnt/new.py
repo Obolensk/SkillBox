@@ -1,30 +1,35 @@
-# N = int(input('Кол-во человек: '))
-# K = int(input('Какое число в считалке? '))
+
+
+# TODO здесь писать код
 N = 5
+# K = int(input('Какое число в считалке? '))
 K = 7
-
-print('Значит, выбывает каждый ', K,'-й человек')
-
+print('Значит, выбывает каждый', K, '-й человек')
 list = []
-if N == len(list):
-    a = 0
-else:
-    a = K % N
-
+# i = 0
+s = 0
 
 for i in range(N):
     list.append(i+1)
-# print('Текущий круг людей: ', list)
-# print('Начало счёта с номера', list[a])
 
-while len(list) > 1:
-    print('Текущий круг людей: ', list)
-    print('a', a)
-    print('Начало счёта с номера', list[a-2])
-    print('Выбывает человек под номером ', list[a-1])
+# print(list)
+
+for i in list:
+    for a in range(K):
+        s = a
+        if a >= len(list):
+            s = a - len(list)
+        print(list[s])
+        s += 1
     print()
-    list.pop(a-1)
+    print('1_Выбывает человек под номером', list[s-1])
+    list.pop(s-1)
+    print(list)
+    print('1_Начало счёта с номера', list[s-1])
 
-print(list)
-print()
-print('Остался человек под номером', list[0])
+
+    # print('1_Выбывает человек под номером', list[s-1]+i)
+    # list.remove(list[s-1]+i)
+    # print(list)
+    # print('1_Начало счёта с номера', list[s-1]+i)
+    # print()
