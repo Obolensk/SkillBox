@@ -1,47 +1,20 @@
 # TODO здесь писать код
 
-# N = int(input('Кол-во человек: '))
-# K = int(input('Какое число в считалке? '))
-N = 5
-K = 7
+people_cnt = int(input('Кол-во человек: '))
+drop_number = int(input('Какое число в считалке? '))
+print('Значит, выбывает каждый', drop_number, 'человек')
 
-print('Значит, выбывает каждый ', K,'-й человек')
+people_list = []
+for i_num in range(1, people_cnt + 1):
+    people_list.append(i_num)
+index_del = 0
 
-list = []
-count = 0
+while len(people_list) > 1:
+    print('Текущий круг людей:', people_list)
+    index_start = index_del % len(people_list)
+    print('Начало счёта с номера', people_list[index_start])
+    index_del = (index_start + drop_number - 1) % len(people_list)
+    print('Выбывает человек под номером', people_list[index_del])
+    people_list.remove(people_list[index_del])
 
-for i in range(N):
-    list.append(i+1)
-
-while len(list) > 1:
-    a = 0
-    print()
-    print('Текущий круг людей: ', list)
-    rem = K % len(list)
-    if len(list) == N:
-        print('Начало счёта с номера', list[a])
-        # if N > K:
-        #     rem = N % K
-        #     print('Выбывает человек под номером ', list[rem-1])
-        # else:
-        print('Выбывает человек под номером ', list[rem-1])
-        list.pop(rem-1)
-        a = rem
-    else:
-        print('Начало счёта с номера', list[a+1])
-        # if N > K:
-        #     rem = N % K
-        #     print('Выбывает человек под номером ', list[rem-1])
-        # else:
-        print('Выбывает человек под номером ', list[rem])
-        x = list.index(list[rem])
-        print('x', x)
-        print('a', a)
-        list.pop(rem)
-        a = rem
-
-
-
-
-print()
-print('Остался человек под номером', list[0])
+print('\nОстался человек под номером', people_list[0])
