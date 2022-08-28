@@ -9,14 +9,16 @@ for i in range(rol_nums):
     print('Размер', i+1, end='')
     rol_size = int(input('-й пары: '))
     rol_sizes.append(rol_size)
+print('rol_sizes = ', rol_sizes)
 
 hum_nums = int(input('Кол-во людей: '))
 for i in range(hum_nums):
     print('Размер ноги ', i+1, end='')
     foot_size = int(input('-го человека: '))
     feet_sizes.append(foot_size)
+print('feet_sizes = ', feet_sizes)
 
-x = len(rol_sizes)
+x = rol_nums
 for foot in feet_sizes:
     for i in range(x):
         if foot <= rol_sizes[i]:
