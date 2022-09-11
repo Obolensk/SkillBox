@@ -1,16 +1,8 @@
 # TODO здесь писать код
 
 my_str = input('Введите строку: ')
-rev_str = my_str[::-1]
-new_str = []
+h_list = [i for i in range(len(my_str)) if my_str[i] == 'h']
 
-print(rev_str)
+print('Развёрнутая последовательность между первым и последним h:', my_str[h_list[-1]-1:h_list[0]:-1])
 
-for i in range(len(rev_str)):
-    if rev_str[i] != 'h':
-        continue
-    else:
-        for j in range(i, len(rev_str)):
-            new_str.append(rev_str[j])
 
-print(new_str)
