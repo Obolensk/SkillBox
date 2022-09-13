@@ -14,9 +14,20 @@ for i in range(len(new_str)-1):
     if new_str[i] == new_str[i+1]:
         letter_count += 1
         decoded.append(new_str[i] + str(letter_count))
-        letter_count = 1
+        if new_str[i] == new_str[i-1]:
+            decoded.pop(i-1)
     else:
-        decoded.append(new_str[i] + '1')
+        letter_count = 1
+        decoded.append(new_str[i] + str(letter_count))
 
 print(decoded)
 
+# Надо прописать подробный алгоритм
+# 1. Делаю список
+# 2. Считаю количество элементов подряд (вот это надо подробнее расписать)
+# ...
+# 3. Вывожу элемент + количество
+# 4.
+# 5.
+# 6.
+# 7.
