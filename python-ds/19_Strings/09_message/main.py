@@ -1,8 +1,7 @@
 # TODO здесь писать код
 
-# msg = input('Сообщение: ').split()
-msg = 'Это задание очень! простое.'.split()
-# syms = ['.', ',', '!', '?', ':', ';']
+msg = input('Сообщение: ').split()
+# msg = 'Это задание очень! простое.'.split()
 
 # print(msg)
 # print(msg[1])
@@ -13,6 +12,4 @@ for word in msg:
         list.append(letter)
     print(''.join(list[::-1]), end=' ')
     list = []
-
-#
 
