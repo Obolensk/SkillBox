@@ -2,8 +2,9 @@
 
 while True:
     ip_adress = input('Введите IP: ').split('.')
-    print(ip_adress)
+    # print(ip_adress)
     num_count = 0
+    correct = 0
     for num in ip_adress:
         num_count += 1
         if not num.isdigit():
@@ -21,6 +22,7 @@ while True:
         # elif num_count != 4:
         #     print('Адрес — это четыре числа, разделённые точками.')
         else:
-            print('IP-адрес корректен.')
-
-    break
+            correct += 1
+    if correct == 4:
+        print('IP-адрес корректен.')
+        break
