@@ -48,8 +48,6 @@ def shift(str, count):
         new_str = [str[i % count - 1] for i in range(len(str))]
     else:
         new_str = [str[i - count] for i in range(len(str))]
-        # else:
-        #     new_str = [str[i - 1] for i in range(len(str))]
     return ''.join(new_str)
 
 
@@ -60,6 +58,7 @@ for word in new_text.split():
     print(shift(word, num_count), end=' ')
     if '/' in word:
         num_count += 1
+        print()
 
 
 # new_text_2 = []
