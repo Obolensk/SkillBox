@@ -1,15 +1,18 @@
 # TODO здесь писать код
 
-msg = input('Сообщение: ').split()
-# msg = 'Это задание очень! простое.'.split()
+msg = input('Сообщение: ')
 
-# print(msg)
-# print(msg[1])
+msg_1 = ''
+new_msg = ''
 
-list = []
-for word in msg:
-    for letter in word:
-        list.append(letter)
-    print(''.join(list[::-1]), end=' ')
-    list = []
+for sym in msg:
+    if sym.isalpha():
+        msg_1 += sym
+    else:
+        msg_1 = msg_1[::-1]
+        new_msg += msg_1
+        new_msg += sym
+        msg_1 = ''
 
+for new_word in new_msg:
+    print(''.join(new_word), end='')
