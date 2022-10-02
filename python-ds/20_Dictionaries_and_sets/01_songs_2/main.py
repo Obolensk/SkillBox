@@ -11,3 +11,15 @@ violator_songs = {
 }
 
 # TODO здесь писать код
+
+# print(violator_songs)
+
+songs_num = int(input('Сколько песен выбрать? '))
+
+times = 0
+for songs in range(songs_num):
+    print('Название', songs + 1, 'песни:', end = '')
+    name = input(' ')
+    # print(violator_songs[name])
+    times += violator_songs[name]
+print('Общее время звучания песен:', round(times, 2))
