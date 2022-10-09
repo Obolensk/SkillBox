@@ -25,3 +25,17 @@ store = {
 }
 
 # TODO здесь писать код
+
+q = 0
+cost = 0
+print()
+for good in goods:
+  print(good, '- ', end = '')
+  for i in range(len(store[goods[good]])):
+    q += store[goods[good]][i]['quantity']
+    cost += store[goods[good]][i]['quantity'] * store[goods[good]][i]['price']
+  print(q, 'шт.', end = ' ')
+  print('cтоимость', cost, 'руб')
+  print()
+  q = 0
+  cost = 0
