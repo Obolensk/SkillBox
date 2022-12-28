@@ -11,3 +11,4 @@ def disc(n, a, b, c):
       disc(n-1, c, b, a)
           
 disc(5, 1, 3, 2)
+
