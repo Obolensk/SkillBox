@@ -1,10 +1,16 @@
 import os
 
+new_file = open('C:/Users/e.menshaev/Desktop/Skillbox/python-ds/23_Intermediate/scripts.txt', 'a', encoding='UTF-8')
 for i in os.listdir('C:/Users/e.menshaev/Desktop/Skillbox/python-ds/15_IDE/07_years'):
-    script = open(i, 'r')
+    script = open(os.path.join('C:/Users/e.menshaev/Desktop/Skillbox/python-ds/15_IDE/07_years', i), 'r',
+                  encoding='UTF-8')
     my_script = script.read()
     print(i)
     print(my_script)
+    new_file.write(my_script)
+    new_file.write('\n ')
+    new_file.write('\n****************************************')
+    new_file.write('\n ')
 
 
 
