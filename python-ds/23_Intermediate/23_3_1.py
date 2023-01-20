@@ -1,5 +1,5 @@
-file = open('C:/Users/ASUS/Desktop/my/PYTHON/SkillBox/python-ds/23_Intermediate/group_1.txt', 'r', encoding='utf-8')
-file_2 = open('C:/Users/ASUS/Desktop/my/PYTHON/SkillBox/python-ds/23_Intermediate/group_2.txt', 'r', encoding='utf-8')
+file = open('C:/Users/e.menshaev/Desktop/Skillbox/python-ds/23_Intermediate/group_1.txt', 'r', encoding='utf-8')
+file_2 = open('C:/Users/e.menshaev/Desktop/Skillbox/python-ds/23_Intermediate/group_2.txt', 'r', encoding='utf-8')
 # data = file.read()
 # print(data)
 
