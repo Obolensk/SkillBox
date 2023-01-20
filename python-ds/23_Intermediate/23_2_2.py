@@ -3,7 +3,7 @@ import random
 
 my_dir = 'C:/Users/e.menshaev/Desktop/Skillbox/python-ds/15_IDE/'
 file_name = 'main.py'
-count = random.randint(2, 4)
+count = random.randint(0, 7)
 print(count)
 i = 0
 
@@ -17,7 +17,7 @@ for dirs in os.listdir(my_dir):
             print('Размер файла -', os.path.getsize(os.path.join(my_dir, dirs, file)), 'байт!')
             my_read = open(os.path.join(my_dir, dirs, file), 'r', encoding= 'UTF-8')
             i += 1
-            if count == i:
+            if i == count:
                 my = my_read.read()
                 print(my)
                 print()
