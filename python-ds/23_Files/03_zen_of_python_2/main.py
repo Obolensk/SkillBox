@@ -9,7 +9,6 @@ strs = 0
 r_let = 10
 l_count = 0
 
-
 zen = new_file.read()
 zen_list = []
 
@@ -28,22 +27,22 @@ print('Количество строк в файле:', strs)
 for i in zen:
     zen_list.append(i)
 
-print(zen_list)
-print((len(zen_list)))
+# print(zen_list)
+# print((len(zen_list)))
 
 
 for a in range(len(zen_list)):
-    for b in range(len(zen_list)):
-        if zen_list[a].lower() == zen_list[b].lower():
-            l_count += 1
-    print('Количество букв ', zen_list[a].lower(), 'равняется', l_count)
-    if l_count < r_let:
-        r_let = l_count
-        my_let = zen_list[b].lower()
-    l_count = 0
+    # print('Для a = ',zen_list[a] , 'str(a).isalpha() = ', str(zen_list[a]).isalpha())
+    if str(zen_list[a]).isalpha():
+        for b in range(len(zen_list)):
+            if zen_list[a].lower() == zen_list[b].lower():
+                l_count += 1
+        # print('Количество букв ', zen_list[a].lower(), 'равняется', l_count)
+        if l_count < r_let:
+            r_let = l_count
+            my_let = zen_list[a].lower()
+        l_count = 0
 
-print()
-print('r_let = ', r_let)
-print()
-print('my_let = ', my_let)
+print('Наиболее редкая буква в файле:',my_let , 'Она встречается всего-то навсего', r_let, 'раза! Вот так-то!!!')
+
 
