@@ -4,16 +4,25 @@ import os
 
 text = input('Введите строку: ')
 path = input('Куда хотите сохранить документ? Введите последовательность папок (через пробел):')
-my_path = 'C:/Users/e.menshaev/Desktop/Skillbox/python-ds/' + path.split()[0] + '/' + path.split()[1] + '/'
-# dirs_list = dirs.split()
-# title = input('Введите имя файла: ')
+title = input('Введите имя файла: ')
 
+# Создаю файл
+new_title = os.path.join('C:/Users/e.menshaev/Desktop/Skillbox/python-ds/'
+                         + path.split()[0] + '/' + path.split()[1] + '/' + title + '.txt')
 
-# new_file.write(text)
+if os.path.exists(new_title):
+    ans = input('Файл существует!!! Вы действительно хотите перезаписать файл? ')
+    if ans == 'да' or ans == 'Да':
+        # Открываю файл и записываю в него текст
+        new_file = open(new_title, 'w+', encoding='utf-8')
+        new_file.write(text)
+    else:
+        print('ГОТОВО!!!')
+else:
+    # Создаю директорию
+    os.makedirs(os.path.join('C:/Users/e.menshaev/Desktop/Skillbox/python-ds/', path.split()[0], path.split()[1]))
 
-text = text + '.txt'
-print(text)
-print(my_path)
-print(my_path + text)
+    # Открываю файл и записываю в него текст
+    new_file = open(new_title, 'w', encoding='utf-8')
+    new_file.write(text)
 
-# new_file = open(text, r, encoding='UTF-8')
