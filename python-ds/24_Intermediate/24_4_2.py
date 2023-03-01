@@ -13,5 +13,3 @@ with open('words.txt', 'r', encoding='utf-8') as file:
             # print(sym.isdigit())
             # print()
     print('Количество палиндромов в файле равно {}'.format(pal_count))
-
-
