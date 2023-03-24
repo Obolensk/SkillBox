@@ -42,13 +42,15 @@ class Gardener:
 
     def take_care(self, garden):
         self.garden = garden
-        garden = PotatoGarden()
-        garden.grow_all()
-        garden.are_all_ripe()
+        garden = PotatoGarden(5)
+        while not garden.are_all_ripe():
+            garden.grow_all()
+            garden.are_all_ripe()
 
 my_garden = PotatoGarden(5)
 ivan = Gardener('Ivan', my_garden)
 ivan.take_care(my_garden)
+
 # my_garden.are_all_ripe()
 # for _ in range(3):
 #     my_garden.grow_all()
