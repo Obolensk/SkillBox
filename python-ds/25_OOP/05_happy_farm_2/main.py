@@ -35,9 +35,21 @@ class PotatoGarden:
             print('Картошка еще не созрела!\n')
         else:
             print('Вся картошка созрела! Можно собирать!')
+class Gardener:
+    def __init__(self, name, garden):
+        self.name = name
+        self.garden = garden
+
+    def take_care(self, garden):
+        self.garden = garden
+        garden = PotatoGarden()
+        garden.grow_all()
+        garden.are_all_ripe()
 
 my_garden = PotatoGarden(5)
-my_garden.are_all_ripe()
-for _ in range(3):
-    my_garden.grow_all()
-    my_garden.are_all_ripe()
+ivan = Gardener('Ivan', my_garden)
+ivan.take_care(my_garden)
+# my_garden.are_all_ripe()
+# for _ in range(3):
+#     my_garden.grow_all()
+#     my_garden.are_all_ripe()
