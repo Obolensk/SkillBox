@@ -44,7 +44,7 @@ petr.info()
 while petr.hungry >= 0:
     day_num += 1
     cube = random.randint(1, 6)
-    print(cube)
+    # print(cube)
     if petr.hungry < 20:
         petr.eat()
     elif petr.meal < 10:
