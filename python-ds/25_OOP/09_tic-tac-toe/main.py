@@ -1,6 +1,6 @@
 # TODO здесь писать код
 class Cell:
-    def __init__(self, number, value=False):
+    def __init__(self, number=0, value=False):
         self.number = number
         self.value = value
     def step(self):
@@ -12,13 +12,13 @@ class Cell:
 
 class Board():
     def cells(self, cell):
-        cell = Cell(9)
+        self.cell = cell
+        cell = Cell()
         my_board = []
         for i in range(9):
-            my_board.append(Cell(i))
-        print('Номер - {} Значение - {}'.format(cell.number, cell.value))
+            my_board.append(Cell(number=i, value=False))
+            print('Номер - {} Значение - {}'.format(cell.number, cell.value))
         # return my_board
-
 
 class Player:
     def __init__(self, name, step=False):
