@@ -1,19 +1,42 @@
 # TODO здесь писать код
 class Cell:
-    def __init__(self, number, value):
+    def __init__(self, number, value=False):
         self.number = number
         self.value = value
-class Board(Cell):
-    # def __init__(self):
-        def new_cell(self):
-            my_board = []
-            new_one = self.value
-            for i in range(9):
-                my_board.append(new_one)
+    def step(self):
+        if self.value == True:
+            print('Клетка {} занята'.format(self.number))
+        else:
+            self.value = True
 
-print(Board)
-print(Board.new_cell())
-# print(Cell.new_cell())
 
-# for i in Board.new_cell():
-#     print(i)
+class Board():
+    def cells(self, cell):
+        cell = Cell(9)
+        my_board = []
+        for i in range(9):
+            my_board.append(Cell(i))
+        print('Номер - {} Значение - {}'.format(cell.number, cell.value))
+        # return my_board
+
+
+class Player:
+    def __init__(self, name, step=False):
+        self.name = name
+        self.step = step
+
+me = Player('I am')
+print(me.name)
+me.step = 'x'
+print(me.step)
+cell = Cell(1)
+bbb = Board()
+bbb.cells(cell)
+# print(bbb.cells())
+
+# for a in bbb.cells():
+#     for i in a:
+#         print(i)
+
+
+# print('Номер - {} Значение - {}'.format(cell.number, cell.value))
