@@ -1,4 +1,5 @@
 # TODO здесь писать код
+
 class Cell:
     def __init__(self, number=0, value=False):
         self.number = number
@@ -8,7 +9,6 @@ class Cell:
             print('Клетка {} занята'.format(self.number))
         else:
             self.value = True
-
 
 class Board():
     def cells(self, cell):
