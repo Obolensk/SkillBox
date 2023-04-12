@@ -1,69 +1,130 @@
 # TODO здесь писать код
+
 import random
-class Deck:
-    def __init__(self,
-                 rank= [2, 3, 4, 5, 6, 7, 8, 9, 10, 'валет', 'дама', 'король', 'туз'],
-                 suit= ['пики', 'крести', 'буби', 'черви']):
-        self.rank = rank
+
+
+class Card:
+    def __init__(self, suit, rank):
         self.suit = suit
-    def make(self):
-        cards = []
-        deck = []
-        fault = 0
-        while fault < 100:
-            cards.append(self.rank[random.randint(0, len(self.rank) - 1)])
-            cards.append(self.suit[random.randint(0, len(self.suit) - 1)])
-            if cards not in deck:
-                deck.append(cards)
-                cards = []
-                fault = 0
-            else:
-                cards = []
-                fault += 1
-                continue
-        # print('len(deck) = ', len(deck))
-        # print()
-        return deck
+        self.rank = rank
+
+    def __str__(self):
+        return f'{self.rank} {self.suit}'
+
+
+class Deck:
+    suits = ['Черви', 'Буби', 'Крести', 'Пики']
+    ranks = ['Туз', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Валет', 'Дама', 'Король']
+
+    def __init__(self):
+        self.cards = []
+        for suit in self.suits:
+            for rank in self.ranks:
+                self.cards.append(Card(suit, rank))
+        self.shuffle()
+
+    def shuffle(self):
+        random.shuffle(self.cards)
+
+    def deal(self):
+        return self.cards.pop()
+
+
+class Hand:
+    def __init__(self):
+        self.cards = []
+        self.value = 0
+        self.aces = 0
+
+    def add_card(self, card):
+        self.cards.append(card)
+        if card.rank == 'Туз':
+            self.aces += 1
+        self.value += self.get_card_value(card)
+
+    def get_card_value(self, card):
+        if card.rank in ['Валет', 'Дама', 'Король']:
+            return 10
+        elif card.rank == 'Туз':
+            return 11
+        else:
+            return int(card.rank)
+
+    def adjust_for_ace(self):
+        while self.value > 21 and self.aces:
+            self.value -= 10
+            self.aces -= 1
+
+
 class Player:
-    def __init__(self, name, score=0, hand_score=0):
+    def __init__(self, name):
         self.name = name
-        self.score = score
-        self.hand_score = hand_score
-    def first_deal(self, deck):
-        my_hand = []
-        deck = Deck()
-        my_hand.append(deck.make()[0])
-        my_hand.append(deck.make()[1])
-        if my_hand[0][0] in range(2, 10):
-            self.hand_score += my_hand[0][0]
+        self.hand = Hand()
+
+    def add_card_to_hand(self, card):
+        self.hand.add_card(card)
+
+    def show_hand(self, dealer_start=True):
+        print(f"\nРука игрока {self.name}")
+        if dealer_start:
+            print(" <карты скрыты>")
+            print(f' {self.hand.cards[1]}')
         else:
-            self.hand_score += 10
-        if my_hand[1][0] in range(2, 10):
-            self.hand_score += my_hand[1][0]
+            for card in self.hand.cards:
+                print(f' {card}')
+        print(f"Всего очков: {self.hand.value}")
+
+
+class Dealer(Player):
+    def show_hand(self, dealer_start=True):
+        print(f"\nРука Дилера:")
+        if dealer_start:
+            print(" <карты скрыты>")
+            print(f' {self.hand.cards[1]}')
         else:
-            self.hand_score += 10
-        self.score += self.hand_score
-        # print('Рука игрока {} равна {} очков!'.format(self.name, score))
-        if self.score < 22:
-            print('Игрок {} У Вас {} очков'.format(self.name, self.score))
-            ans = input('Ещё? ')
-            if ans == 'да':
-                self.first_deal(deck)
-        else:
-            print('Перебор, Вы проиграли!')
-            # break
-        return my_hand, self.score
+            for card in self.hand.cards:
+                print(f' {card}')
+        print(f"Всего очков: {self.hand.value}")
+
 
 deck = Deck()
 
-my_deck = deck.make()
-print()
-print(my_deck)
+player = Player("Player 1")
+dealer = Dealer("Dealer")
 
-print()
-print('Создаю игроков')
-me = Player('I am')
-dealer = Player('Дилер')
-print('Моя рука {}'.format(me.first_deal(my_deck)))
-print()
-print('Рука дилера {}'.format(dealer.first_deal(my_deck)))
+player.add_card_to_hand(deck.deal())
+dealer.add_card_to_hand(deck.deal())
+
+player.add_card_to_hand(deck.deal())
+dealer.add_card_to_hand(deck.deal())
+
+player.show_hand()
+dealer.show_hand()
+
+game_over = False
+
+while not game_over:
+    choice = input("\nWould you like to hit or stay? ")
+    if choice.lower() == 'hit':
+        player.add_card_to_hand(deck.deal())
+        player.show_hand()
+        dealer.show_hand()
+        if player.hand.value > 21:
+            print("\nYou busted!")
+            game_over = True
+    else:
+        while dealer.hand.value < 17:
+            dealer.add_card_to_hand(deck.deal())
+        player.show_hand()
+        dealer.show_hand(False)
+        if dealer.hand.value > 21:
+            print("\nДилер проиграл, ты выиграл!")
+            game_over = True
+        elif dealer.hand.value > player.hand.value:
+            print("\nДилер выиграл!")
+            game_over = True
+        elif dealer.hand.value < player.hand.value:
+            print("\nТы выиграл!")
+            game_over = True
+
+

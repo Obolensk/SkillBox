@@ -1,81 +1,113 @@
 # TODO здесь писать код
+
 import random
 
-class Cell:
-    def __init__(self, x='5x', y='6y'):
-        self.x = x
-        self.y = y
+class TicTacToe:
+    def __init__(self):
+        self.board = [' ' for _ in range(9)]
+        self.current_winner = None
 
-class Board:
-    def new_board(self):
-        cell_list = []
-        for x_coord in ['a', 'b', 'c']:
-            for y_coord in range(3):
-                cell_list.append(x_coord + str(y_coord+1))
-        My_dict = {}
-        for cell in cell_list:
-            My_dict[cell] = False
-        return My_dict
+    def print_board(self):
+        for row in [self.board[i * 3:(i + 1) * 3] for i in range(3)]:
+            print('| ' + ' | '.join(row) + ' |')
 
-class Player:
-    def __init__(self, name):
-        self.name = name
-    def step(self, board=Board()):
-        self.board = board
-        my_step = input('Введите поле в формате a1, b3 и т.д.: ')
-        if my_step in board:
-            if board[my_step]== False:
-                print('OK')
-                board[my_step] = 'x'
-                print(board)
-            else:
-                print('Занято!')
-                self.step(board)
+    @staticmethod
+    def print_board_numbers():
+        number_board = [[str(i) for i in range(j * 3, (j + 1) * 3)] for j in range(3)]
+        for row in number_board:
+            print('| ' + ' | '.join(row) + ' |')
+
+    def available_moves(self):
+        return [i for i, spot in enumerate(self.board) if spot == ' ']
+
+    def empty_squares(self):
+        return ' ' in self.board
+
+    def num_empty_squares(self):
+        return self.board.count(' ')
+
+    def make_move(self, square, letter):
+        if self.board[square] == ' ':
+            self.board[square] = letter
+            if self.winner(square, letter):
+                self.current_winner = letter
+            return True
+        return False
+
+    def winner(self, square, letter):
+        row_ind = square // 3
+        row = self.board[row_ind * 3: (row_ind + 1) * 3]
+        if all([spot == letter for spot in row]):
+            return True
+        col_ind = square % 3
+        column = [self.board[col_ind + i * 3] for i in range(3)]
+        if all([spot == letter for spot in column]):
+            return True
+        if square % 2 == 0:
+            diagonal1 = [self.board[i] for i in [0, 4, 8]]
+            if all([spot == letter for spot in diagonal1]):
+                return True
+            diagonal2 = [self.board[i] for i in [2, 4, 6]]
+            if all([spot == letter for spot in diagonal2]):
+                return True
+        return False
+
+
+def play(game, x_player, o_player, print_game=True):
+    if print_game:
+        game.print_board_numbers()
+
+    letter = 'X'
+    while game.empty_squares():
+        if letter == 'O':
+            square = o_player.get_move(game)
         else:
-            print('Не работает!!!')
-            self.step(board)
-    def comp_step(self, board=Board()):
-        self.board = board
-        co_step = ['a', 'b', 'c'][random.randint(0, 2)] + ['1', '2', '3'][random.randint(0, 2)]
-        if co_step in board:
-            if board[co_step]== False:
-                print('OK')
-                board[co_step] = 'o'
-                print(board)
-            else:
-                self.comp_step(board)
-        else:
-            self.comp_step(board)
+            square = x_player.get_move(game)
 
-me = Player('ME')
-board = Board.new_board(5)
-print(board)
+        if game.make_move(square, letter):
+            if print_game:
+                print('\n' + letter + ' makes a move to square', square)
+                game.print_board()
+                print('')
 
-deal = Player('Dealer')
+            if game.current_winner:
+                if print_game:
+                    print(letter + ' wins!')
+                return letter
 
-false_count = 9
-for i in board:
-    print(board[i])
-    if board[i] != False:
-        false_count -= 1
-print(false_count)
+            letter = 'O' if letter == 'X' else 'X'
 
-winner = False
-while false_count > 0 and winner == False:
-    me.step(board)
-    deal.comp_step(board)
-    if board['a1'] == board['a2'] == board['a3'] == 'x' or board['a1'] == board['b2'] == board['c3'] == 'x' \
-            or board['a3'] == board['b2'] == board['c1'] == 'x' or board['b1'] == board['b2'] == board['b3'] == 'x' \
-            or board['c1'] == board['c2'] == board['c3'] == 'x' or board['a1'] == board['b1'] == board['c1'] == 'x' \
-            or board['a2'] == board['b2'] == board['c2'] == 'x' or board['a3'] == board['b3'] == board['c3'] == 'x':
-        print('Наш победитель - это пользователь по имени {}'.format(me.name))
-    elif board['a1'] == board['a2'] == board['a3'] == 'o' or board['a1'] == board['b2'] == board['c3'] == 'o' \
-            or board['a3'] == board['b2'] == board['c1'] == 'o' or board['b1'] == board['b2'] == board['b3'] == 'o' \
-            or board['c1'] == board['c2'] == board['c3'] == 'o' or board['a1'] == board['b1'] == board['c1'] == 'o' \
-            or board['a2'] == board['b2'] == board['c2'] == 'o' or board['a3'] == board['b3'] == board['c3'] == 'o':
-        print('Наш победитель - это пользователь по имени {}'.format(deal.name))
-        winner = True
-else:
-    print('Игра закончена!')
+    if print_game:
+        print('It\'s a tie!')
 
+class HumanPlayer:
+    def __init__(self, letter):
+        self.letter = letter
 
+    def get_move(self, game):
+        valid_square = False
+        val = None
+        while not valid_square:
+            square = input(self.letter + '\'s turn. Input move (0-8): ')
+            try:
+                val = int(square)
+                if val not in game.available_moves():
+                    raise ValueError
+                valid_square = True
+            except ValueError:
+                print('Invalid square. Try again.')
+        return val
+
+class RandomComputerPlayer:
+    def __init__(self, letter):
+        self.letter = letter
+
+    def get_move(self, game):
+        square = random.choice(game.available_moves())
+        return square
+
+if __name__ == '__main__':
+    x_player = HumanPlayer('X')
+    o_player = RandomComputerPlayer('O')
+    t = TicTacToe()
+    play(t, x_player, o_player, print_game=True)

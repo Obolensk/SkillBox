@@ -1,3 +1,4 @@
+# TODO здесь писать код
 
 import random
 
@@ -7,7 +8,6 @@ class Cell:
         self.y = y
 
 class Board:
-
     def new_board(self):
         cell_list = []
         for x_coord in ['a', 'b', 'c']:
@@ -19,10 +19,8 @@ class Board:
         return My_dict
 
 class Player:
-
     def __init__(self, name):
         self.name = name
-
     def step(self, board=Board()):
         self.board = board
         my_step = input('Введите поле в формате a1, b3 и т.д.: ')
@@ -37,7 +35,6 @@ class Player:
         else:
             print('Не работает!!!')
             self.step(board)
-
     def comp_step(self, board=Board()):
         self.board = board
         co_step = ['a', 'b', 'c'][random.randint(0, 2)] + ['1', '2', '3'][random.randint(0, 2)]
