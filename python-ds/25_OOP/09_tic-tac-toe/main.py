@@ -26,7 +26,7 @@ class TicTacToe:
     def num_empty_squares(self):
         return self.board.count(' ') # функция возвращает количество пустых полей на доске
 
-    def make_move(self, square, letter):
+    def make_move(self, square, letter): # функция принимает 2 аргумента, поле и символ (крестик или нолик), если поле пустое, то делаем ход и проверяем победил ли игрок, если поле не пустое, то возвращает False
         if self.board[square] == ' ':
             self.board[square] = letter
             if self.winner(square, letter):
@@ -35,30 +35,30 @@ class TicTacToe:
         return False
 
     def winner(self, square, letter):
-        row_ind = square // 3
-        row = self.board[row_ind * 3: (row_ind + 1) * 3]
+        row_ind = square // 3 # row_ind = 0, 1, 2
+        row = self.board[row_ind * 3: (row_ind + 1) * 3] # Проверяет три подряд элемента, начиная с элемента 0, 3, 6 (проверят строки) и возвращает True если все элементы одинаковы
         if all([spot == letter for spot in row]):
             return True
-        col_ind = square % 3
-        column = [self.board[col_ind + i * 3] for i in range(3)]
+        col_ind = square % 3 # col_ind = 0, 1, 2
+        column = [self.board[col_ind + i * 3] for i in range(3)] # Проверяет три элемента (0,3,6 / 1,4,7 / 2,5,8) (проверят столбцы) и возвращает True если все элементы одинаковы
         if all([spot == letter for spot in column]):
             return True
         if square % 2 == 0:
-            diagonal1 = [self.board[i] for i in [0, 4, 8]]
+            diagonal1 = [self.board[i] for i in [0, 4, 8]] # Проверяет диагональ и возвращает True если все элементы одинаковы
             if all([spot == letter for spot in diagonal1]):
                 return True
             diagonal2 = [self.board[i] for i in [2, 4, 6]]
             if all([spot == letter for spot in diagonal2]):
                 return True
-        return False
+        return False # в противном случае False
 
 
-def play(game, x_player, o_player, print_game=True):
+def play(game, x_player, o_player, print_game=True): # Функция вне классов, принимает на вход название игры и имена игроков,
     if print_game:
-        game.print_board_numbers()
+        game.print_board_numbers() # печатает доску с ходами игроков???
 
     letter = 'X'
-    while game.empty_squares():
+    while game.empty_squares(): # если на доске ещё есть пустые поля
         if letter == 'O':
             square = o_player.get_move(game)
         else:
@@ -84,11 +84,11 @@ class HumanPlayer:
     def __init__(self, letter):
         self.letter = letter
 
-    def get_move(self, game):
+    def get_move(self, game): # ход игрока
         valid_square = False
         val = None
         while not valid_square:
-            square = input(self.letter + '\'s turn. Input move (0-8): ')
+            square = input(self.letter + '\'s turn. Input move (0-8): ') # предложение сделать ход
             try:
                 val = int(square)
                 if val not in game.available_moves():
