@@ -1,32 +1,39 @@
-# TODO здесь писать код
+import random  # импортируем модуль random для генерации случайных ходов
 
-import random
 
+# определяем класс игры "Крестики-нолики"
 class TicTacToe:
     def __init__(self):
-        self.board = [' ' for _ in range(9)] # Список из девяти пробелов
-        self.current_winner = None # Победитель не определен
+        # инициализируем игровое поле с пустыми клетками
+        self.board = [' ' for _ in range(9)]
+        self.current_winner = None  # победитель - никто, пока нет игрока, который выиграл
 
-    def print_board(self): # метод печатает пустую доску
-        for row in [self.board[i * 3:(i + 1) * 3] for i in range(3)]: # для строки из списка из трех списков по три пробела в каждом
-            print('| ' + ' | '.join(row) + ' |') # печатаем каждый элемент списка и разделяем их символом "|" и ставим по такому же символу в начале и в конце каждой строки
+    def print_board(self):
+        # выводим игровое поле на экран
+        for row in [self.board[i * 3:(i + 1) * 3] for i in range(3)]:
+            print('| ' + ' | '.join(row) + ' |')
 
     @staticmethod
     def print_board_numbers():
-        number_board = [[str(i) for i in range(j * 3, (j + 1) * 3)] for j in range(3)] # создаем список из трех списков в каждом из которых числа от 0 до 8 по порядку
+        # выводим игровое поле на экран с номерами клеток
+        number_board = [[str(i) for i in range(j * 3, (j + 1) * 3)] for j in range(3)]
         for row in number_board:
-            print('| ' + ' | '.join(row) + ' |') # печатаем каждый элемент списка и разделяем их символом "|" и ставим по такому же символу в начале и в конце каждой строки
+            print('| ' + ' | '.join(row) + ' |')
 
     def available_moves(self):
-        return [i for i, spot in enumerate(self.board) if spot == ' '] # функция возвращает список из девяти элементов, от 0 до 8
+        # возвращаем список возможных ходов
+        return [i for i, spot in enumerate(self.board) if spot == ' ']
 
     def empty_squares(self):
-        return ' ' in self.board # функция возвращает True если на доске ещё есть пустые поля
+        # проверяем, есть ли на поле пустые клетки
+        return ' ' in self.board
 
     def num_empty_squares(self):
-        return self.board.count(' ') # функция возвращает количество пустых полей на доске
+        # возвращаем количество пустых клеток на поле
+        return self.board.count(' ')
 
-    def make_move(self, square, letter): # функция принимает 2 аргумента, поле и символ (крестик или нолик), если поле пустое, то делаем ход и проверяем победил ли игрок, если поле не пустое, то возвращает False
+    def make_move(self, square, letter):
+        # делаем ход, обновляя поле переданным символом
         if self.board[square] == ' ':
             self.board[square] = letter
             if self.winner(square, letter):
@@ -35,79 +42,100 @@ class TicTacToe:
         return False
 
     def winner(self, square, letter):
-        row_ind = square // 3 # row_ind = 0, 1, 2
-        row = self.board[row_ind * 3: (row_ind + 1) * 3] # Проверяет три подряд элемента, начиная с элемента 0, 3, 6 (проверят строки) и возвращает True если все элементы одинаковы
+        # проверяем, есть ли победитель
+        row_ind = square // 3
+        row = self.board[row_ind * 3: (row_ind + 1) * 3]
         if all([spot == letter for spot in row]):
             return True
-        col_ind = square % 3 # col_ind = 0, 1, 2
-        column = [self.board[col_ind + i * 3] for i in range(3)] # Проверяет три элемента (0,3,6 / 1,4,7 / 2,5,8) (проверят столбцы) и возвращает True если все элементы одинаковы
+
+        col_ind = square % 3
+        column = [self.board[col_ind + i * 3] for i in range(3)]
         if all([spot == letter for spot in column]):
             return True
+
         if square % 2 == 0:
-            diagonal1 = [self.board[i] for i in [0, 4, 8]] # Проверяет диагональ и возвращает True если все элементы одинаковы
+            diagonal1 = [self.board[i] for i in [0, 4, 8]]
             if all([spot == letter for spot in diagonal1]):
                 return True
+
             diagonal2 = [self.board[i] for i in [2, 4, 6]]
             if all([spot == letter for spot in diagonal2]):
                 return True
-        return False # в противном случае False
+        return False
 
 
-def play(game, x_player, o_player, print_game=True): # Функция вне классов, принимает на вход название игры и имена игроков,
+# определяем функцию, которая будет запускать игру
+def play(game, x_player, o_player, print_game=True):
     if print_game:
-        game.print_board_numbers() # печатает доску с ходами игроков???
+        # выводим на экран игровое поле с номерами клеток
+        game.print_board_numbers()
 
-    letter = 'X'
-    while game.empty_squares(): # если на доске ещё есть пустые поля
+    letter = 'X'  # устанавливаем начальный символ 'X'
+    while game.empty_squares():
         if letter == 'O':
+            # если ход компьютера, выбираем случайный ход
             square = o_player.get_move(game)
         else:
+            # если ход игрока, запрашиваем ввод
             square = x_player.get_move(game)
 
         if game.make_move(square, letter):
             if print_game:
-                print('\n' + letter + ' makes a move to square', square)
+                # выводим на экран сделанный ход и текущее игровое поле
+                print('\n' + letter + ' сделал ход в клетку', square)
                 game.print_board()
                 print('')
 
             if game.current_winner:
+                # если есть победитель, выводим сообщение и возвращаем его символ
                 if print_game:
-                    print(letter + ' wins!')
+                    print(letter + ' победил!')
                 return letter
 
+            # переключаемся на ход другого игрока
             letter = 'O' if letter == 'X' else 'X'
 
     if print_game:
-        print('It\'s a tie!')
+        # выводим сообщение о ничьей
+        print('Ничья!')
 
+
+# определяем игрока-человека
 class HumanPlayer:
     def __init__(self, letter):
         self.letter = letter
 
-    def get_move(self, game): # ход игрока
+    def get_move(self, game):
+        # запрашиваем ввод игрока и проверяем его корректность
         valid_square = False
         val = None
         while not valid_square:
-            square = input(self.letter + '\'s turn. Input move (0-8): ') # предложение сделать ход
+            square = input(self.letter + ', ваш ход. Введите номер клетки (0-8): ')
             try:
                 val = int(square)
                 if val not in game.available_moves():
                     raise ValueError
                 valid_square = True
             except ValueError:
-                print('Invalid square. Try again.')
+                print('Некорректный ход. Попробуйте снова.')
         return val
 
+
+# определяем игрока-компьютера, который делает случайные ходы
 class RandomComputerPlayer:
     def __init__(self, letter):
         self.letter = letter
 
     def get_move(self, game):
+        # выбираем случайный ход
         square = random.choice(game.available_moves())
         return square
 
+
+# запускаем игру, если этот файл запущен напрямую
 if __name__ == '__main__':
-    x_player = HumanPlayer('X')
-    o_player = RandomComputerPlayer('O')
-    t = TicTacToe()
-    play(t, x_player, o_player, print_game=True)
+    x_player = HumanPlayer('X')  # создаем игрока-человека со символом 'X'
+    o_player = RandomComputerPlayer('O')  # создаем игрока-компьютера со символом 'O'
+    t = TicTacToe()  # создаем объект игры
+    play(t, x_player, o_player,
+         print_game=True)  # запускаем игру с заданными игроками и выводом игрового поля после каждого хода
