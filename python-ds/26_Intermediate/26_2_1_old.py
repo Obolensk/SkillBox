@@ -1,3 +1,4 @@
+
 class Point:
     __x = 0
     __y = 0
@@ -15,23 +16,21 @@ class Point:
         ))
 
     def __str__(self):
+        # return f"Координата точки Х = {self.x}, координата У = {self.y}"
         return 'Координата точки Х = {}, координата Y = {}'.format(self.__x, self.__y)
 
     def get_x(self):
-        return self.__x
 
-    def set_x(self, x):
-        self.__x = x
 
-    def get_y(self):
-        return self.__y
-
-    def set_y(self, y):
-        self.__y = y
-
-a = Point(2, 3)
+a = Point(2, 43)
 b = Point(5, 12)
+# a.info()
 
 print(str(a))
 print()
 print(str(b))
+
+
+# print(a.count)
+# print(b.count)
+
