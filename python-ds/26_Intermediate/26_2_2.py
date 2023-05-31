@@ -8,5 +8,13 @@ class Human:
         self.age = age
         Human.count += 1
 
+ivan = Human('Ivan', 35)
+print(ivan.name)
+print(ivan.age)
+print(ivan.count)
 
+dima = Human('Dima', 22)
+print(dima.name)
+print(dima.age)
+print(dima.count)
 
