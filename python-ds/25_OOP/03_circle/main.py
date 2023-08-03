@@ -37,3 +37,8 @@ for a in all_circles:
         else:
             continue
     all_circles.pop(all_circles.index(a))
+
+first.square()
+first.long()
+print()
+first.increase(2)
