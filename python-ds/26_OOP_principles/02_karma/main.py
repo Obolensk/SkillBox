@@ -1,25 +1,7 @@
 # TODO здесь писать код
-#
-# import random
-#
-#
-# class Karma:
-#     def __init__(self, points):
-#         self.points = points
-#
-#
-# karma = 0
-# def one_day():
-#     a = karma
-#     if random.randint(1, 10) == 10:
-#         return random.choice(['KillError', 'DrunkError', 'CarCrashError', 'GluttonyError', 'DepressionError'])
-#     else:
-#         a += random.randint(1, 7)
-#     print(a)
-#
-# one_day()
 
 import random
+
 
 class KillError(Exception):
     pass
@@ -50,15 +32,21 @@ def one_day():
             error = random.choice([KillError, DrunkError, CarCrashError, GluttonyError, DepressionError])
             raise error('Произошла ошибка')
     except (KillError, DrunkError, CarCrashError, GluttonyError, DepressionError) as e:
-        with open('karma.log', 'a', encoding='UTF-8') as log_file:
+        with open('karma.log', 'a', encoding='utf-8') as log_file:
             log_file.write(f'Ошибка: {str(e)}\n')
 
+
 def simulate_life():
-    while True:
+    karma = 0
+    while karma < 500:
         try:
             one_day()
+            karma += get_karma()
         except StopIteration as e:
             print(e)
-            break
+            return
+
+        print(f'Текущая карма: {karma}')
+
 
 simulate_life()
