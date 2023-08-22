@@ -27,17 +27,39 @@ class Deck:
 
 class Player:
 
-    def __init__(self, deck):
+    def __init__(self, deck, hand=[]):
         self.deck = deck
+        self.hand = hand
 
     def set_hand(self):
-        hand = []
         for i in range(2):
-            hand.append(self.deck.pop(i))
+            self.hand.append(self.deck.pop(i))
         print()
-        return hand
+        return self.hand
 
-    # def get_card(self):
+    def one_more(self):
+        self.hand.append(self.deck.pop(0))
+        return self.hand
+
+class Dealer:
+
+    def __init__(self, deck, dealer_hand=[]):
+        self.deck = deck
+        self.dealer_hand = dealer_hand
+
+    def set_hand(self):
+        for i in range(2):
+            self.dealer_hand.append(self.deck.pop(i))
+        print()
+        return self.dealer_hand
+
+    def one_more(self):
+        self.dealer_hand.append(self.deck.pop(0))
+        return self.dealer_hand
+
+    def point_count(self):
+        count = 0
+        print('First card is {} point\nSecond card is {} point\nTotal point is {}'.format(self.dealer_hand[0][1], self.dealer_hand[1][1], self.dealer_hand[0][1] + self.dealer_hand[1][1]))
 
 
 
@@ -46,19 +68,22 @@ total = d.make_deck()
 print(total)
 
 me = Player(total)
-dealer = Player(total)
-print(len(total))
-print(me.set_hand())
-print(len(total))
+d = Dealer(total)
+print('Cards in my Deck - ', len(total))
+print('My hand', me.set_hand())
+print('Cards in my Deck - ', len(total))
 # dealer.set_hand()
-print(dealer.set_hand())
-print(len(total))
+print('Dealer hand', d.set_hand())
+print('Cards in my Deck - ', len(total))
 
-if input('Ещё? ') == 'да':
-    print(me.set_hand().append(total.pop(0)))
+# if input('Ещё? ') == 'да':
+#     print(me.one_more())
 
-print()
-print(me.set_hand())
-print(len(total))
+d.point_count()
+
+
+# print()
+# print(me.set_hand())
+# print(len(total))
 
 
