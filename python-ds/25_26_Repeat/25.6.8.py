@@ -27,7 +27,8 @@ class Deck:
 
 class Player:
 
-    def __init__(self, deck, hand=[]):
+    def __init__(self, name, deck, hand=[]):
+        self.name = name
         self.deck = deck
         self.hand = hand
 
@@ -43,7 +44,8 @@ class Player:
 
 class Dealer:
 
-    def __init__(self, deck, dealer_hand=[]):
+    def __init__(self, name, deck, dealer_hand=[]):
+        self.name = name
         self.deck = deck
         self.dealer_hand = dealer_hand
 
@@ -55,11 +57,24 @@ class Dealer:
 
     def one_more(self):
         self.dealer_hand.append(self.deck.pop(0))
+        self.point_count()
         return self.dealer_hand
 
     def point_count(self):
         count = 0
-        print('First card is {} point\nSecond card is {} point\nTotal point is {}'.format(self.dealer_hand[0][1], self.dealer_hand[1][1], self.dealer_hand[0][1] + self.dealer_hand[1][1]))
+        for i in self.dealer_hand:
+            print(i)
+            if i[1] == 'J' or i[1] == 'Q' or i[1] == 'K':
+                count += 10
+            elif i[1] == 'A':
+                if count > 10:
+                    count += 1
+                else:
+                    count += 11
+            else:
+                count += i[1]
+        print('{} total count is {}'.format(self.name, count))
+        return count
 
 
 
@@ -67,8 +82,8 @@ d = Deck()
 total = d.make_deck()
 print(total)
 
-me = Player(total)
-d = Dealer(total)
+me = Player('Me', total)
+d = Dealer('Dealer', total)
 print('Cards in my Deck - ', len(total))
 print('My hand', me.set_hand())
 print('Cards in my Deck - ', len(total))
@@ -80,6 +95,7 @@ print('Cards in my Deck - ', len(total))
 #     print(me.one_more())
 
 d.point_count()
+d.one_more()
 
 
 # print()
