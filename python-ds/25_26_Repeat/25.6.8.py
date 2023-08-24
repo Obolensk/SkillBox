@@ -33,37 +33,22 @@ class Player:
         self.hand = hand
 
     def set_hand(self):
+        self.hand=[]
         for i in range(2):
             self.hand.append(self.deck.pop(i))
-        print()
         return self.hand
 
     def one_more(self):
+        # print('\n - One more')
         self.hand.append(self.deck.pop(0))
-        return self.hand
-
-class Dealer:
-
-    def __init__(self, name, deck, dealer_hand=[]):
-        self.name = name
-        self.deck = deck
-        self.dealer_hand = dealer_hand
-
-    def set_hand(self):
-        for i in range(2):
-            self.dealer_hand.append(self.deck.pop(i))
-        print()
-        return self.dealer_hand
-
-    def one_more(self):
-        self.dealer_hand.append(self.deck.pop(0))
         self.point_count()
-        return self.dealer_hand
+        return self.hand
 
     def point_count(self):
+        # print('\n - Point count')
         count = 0
-        for i in self.dealer_hand:
-            print(i)
+        for i in self.hand:
+            # print(i)
             if i[1] == 'J' or i[1] == 'Q' or i[1] == 'K':
                 count += 10
             elif i[1] == 'A':
@@ -73,33 +58,47 @@ class Dealer:
                     count += 11
             else:
                 count += i[1]
-        print('{} total count is {}'.format(self.name, count))
+        # print('{} total count is {}'.format(self.name, count))
         return count
 
+def winner(player, dealer):
+    if player > 21:
+        print('Перебор, ты проиграл!')
+    elif dealer > 21:
+        print('У Дилера перебор, ты выиграл!')
+    elif player > dealer:
+        print('Уррааа! Ты выиграл!')
+    elif player == dealer:
+        print('0:0!!!')
+    else:
+        print('Dealer win!')
+    print('Результат дилера', dealer)
+    print('Результат твой', player)
 
 
-d = Deck()
-total = d.make_deck()
-print(total)
+deck = Deck()
+total = deck.make_deck()
+# print(total)
 
 me = Player('Me', total)
-d = Dealer('Dealer', total)
-print('Cards in my Deck - ', len(total))
+d = Player('Dealer', total)
+# print('Cards in my Deck - ', len(total))
 print('My hand', me.set_hand())
-print('Cards in my Deck - ', len(total))
-# dealer.set_hand()
-print('Dealer hand', d.set_hand())
-print('Cards in my Deck - ', len(total))
+# me.set_hand()
+# print('Cards in my Deck - ', len(total))
+# print('Dealer hand', d.set_hand())
+d.set_hand()
+# print('Cards in my Deck - ', len(total))
 
-# if input('Ещё? ') == 'да':
-#     print(me.one_more())
+while d.point_count() < 15:
+    d.one_more()
 
-d.point_count()
-d.one_more()
+while me.point_count() < 21:
+    print(me.point_count())
+    ans = input('Продолжаем? ')
+    if ans == 'да':
+        me.one_more()
+    else:
+        break
 
-
-# print()
-# print(me.set_hand())
-# print(len(total))
-
-
+winner(me.point_count(), d.point_count())
