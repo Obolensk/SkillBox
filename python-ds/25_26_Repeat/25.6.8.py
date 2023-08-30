@@ -42,6 +42,7 @@ class Player:
         # print('\n - One more')
         self.hand.append(self.deck.pop(0))
         self.point_count()
+        print(self.hand)
         return self.hand
 
     def point_count(self):
@@ -98,6 +99,7 @@ while me.point_count() < 21:
     ans = input('Продолжаем? ')
     if ans == 'да':
         me.one_more()
+        print()
     else:
         break
 
