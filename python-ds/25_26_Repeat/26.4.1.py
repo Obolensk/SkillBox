@@ -9,7 +9,6 @@ class Unit:
     def __str__(self):
         return '\nUnit {}\nHipoint is {}\nLoss is {}'.format(1, self.hitpoint, self.loss)
 
-
 class Soldier(Unit):
 
     def __init__(self, loss, hitpoint):
@@ -18,9 +17,6 @@ class Soldier(Unit):
 
     def get_loss(self):
         self.hitpoint -= self.loss
-
-    # def __str__(self):
-    #     return 'Unit {}\nHipoint is {}\nLoss is {}'.format(1, self.hitpoint, self.loss)
 
 class Citizen(Unit):
     def __init__(self, loss, hitpoint):
