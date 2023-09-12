@@ -12,6 +12,7 @@ class Apartment(Property):
         super().__init__(worth)
 
     def calculate_tax(self):
+        print('Налог на квартиру', self.worth / 1000)
         return self.worth / 1000
 
 class Car(Property):
@@ -19,6 +20,7 @@ class Car(Property):
         super().__init__(worth)
 
     def calculate_tax(self):
+        print('Налог на машину', self.worth / 200)
         return self.worth / 200
 
 class CountryHouse(Property):
@@ -26,6 +28,7 @@ class CountryHouse(Property):
         super().__init__(worth)
 
     def calculate_tax(self):
+        print('Налог на дачу', self.worth / 500)
         return self.worth / 500
 
 def main():
