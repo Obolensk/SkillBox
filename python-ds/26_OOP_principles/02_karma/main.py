@@ -2,7 +2,6 @@
 
 import random
 
-
 class KillError(Exception):
     pass
 
@@ -19,7 +18,9 @@ class DepressionError(Exception):
     pass
 
 def get_karma():
-    return random.randint(1, 7)
+    outcome = random.randint(1, 7)
+    # print('Выпало значение кармы - ', outcome)
+    return outcome
 
 def one_day():
     karma = get_karma()
@@ -37,10 +38,13 @@ def one_day():
 
 
 def simulate_life():
+    day = 1
     karma = 0
     while karma < 500:
         try:
             one_day()
+            print('\nДень', day, '-й')
+            day += 1
             karma += get_karma()
         except StopIteration as e:
             print(e)

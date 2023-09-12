@@ -1,7 +1,18 @@
 # TODO здесь писать код
 
-class MyDict:
+class MyDict(dict):
 
-MyDict('asd') = 123
+    def __init__(self):
+        super().__init__()
 
-print(MyDict)
+    def get(self, index):
+        if index in self:
+            return self[index]
+        else:
+            return 0
+
+md = MyDict()
+md['asd'] = 12
+print(md)
+print(md.get('asd'))
+print(md.get('qw'))
