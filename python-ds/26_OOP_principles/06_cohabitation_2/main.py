@@ -27,32 +27,26 @@ class House:
             (self.money, self.meal, self.pet_meal, self.dirt)
 
 class Neighbor(House):
-    def __init__(self, name, house, money, satiety=30, happyness=100):
+    def __init__(self, name, money=100, satiety=30, happyness=100):
         super().__init__()
         self.name = name
-        self.house = house
+        # self.house = house
         self.money = money
         self.satiety = satiety
         self.happyness = happyness
-
-class Human(Neighbor):
-    def __init__(self, name):
-        super().__init__(name, money=100, house=House)
-        human_list.append(self)
-        # self.house = house
 
     def pet_the_cat(self):
         self.happyness += 5
         self.satiety -= 10
 
     def earn_money(self):
-        self.house.money += 150
+        self.money += 150
         self.happyness -= 20
         self.satiety -= 10
         print('\nSteve earned money')
 
     def buy_the_coat(self):
-        self.house.money -= 350
+        self.money -= 350
         self.happyness += 60
         self.satiety -= 10
         print('Buy the coat.\nI have {} coats'.format(coat))
@@ -100,8 +94,8 @@ class Cat(Neighbor):
             .format(self.name, self.satiety, self.happyness)
 
 my = House()
-hus = Human('Steve')
-wife = Human('Eve')
+hus = Neighbor('Steve')
+wife = Neighbor('Eve')
 cat = Cat('Tom')
 print(my)
 print(hus)
