@@ -1,25 +1,26 @@
 # TODO здесь писать код
 
 my_stack = {}
+todoist = []
 
 class Stack:
+    pass
 
-    # def add_the_task(self):
-    #     my_stack
-
-    def del_the_task(self):
-        pass
-
-
-class TaskManager(Stack):
-    def __init__(self, stack):
-        self.stack = stack
+class TaskManager():
 
     def new_task(self, task, priority):
-        my_stack[priority] = task
-        # self.stack.add_the_task(task)
+        if priority in my_stack.keys():
+            my_stack[priority] += '; ' + task
+        else:
+            my_stack[priority] = task
 
+manager = TaskManager()
+manager.new_task("сделать уборку", 4)
+manager.new_task("помыть посуду", 4)
+manager.new_task("отдохнуть", 1)
+manager.new_task("поесть", 2)
+manager.new_task("сдать дз", 2)
 
-print(my_stack)
+for i in sorted(my_stack.keys()):
+    print(i, ':', my_stack[i])
 
-print(my_stack)
