@@ -137,11 +137,6 @@ for day in range(1, 365):
         hus.earn_money()
 
 
-#
-# print(Human.__getattribute__(hus, name='Tom'))
-# print(hus)
-# print(wife)
-# print(my.dirt)
-# print()
-# print(human_list)
+# I have to try to do the task in a new file without any old code.
+
 
