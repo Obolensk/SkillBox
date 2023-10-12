@@ -1,22 +1,13 @@
 
 count = 0
 
-class СountIterator:
+def СountIterator():
+    while True:
+        global count
+        count += 1
+        print(count)
 
-    def __init__(self, limit):
-        self.limit = limit
-        self.counter = 0
-
-    def __next__(self):
-        if self.counter < self.limit:
-            self.counter += 1
-            return 1
-        else:
-            raise StopIteration
-
-
-
-my_iter = СountIterator(5)
+my_iter = СountIterator()
 for i_elem in my_iter:
     print(i_elem)
 
