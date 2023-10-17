@@ -1,18 +1,12 @@
 
-l = [1, 2, 3, 4, 5]
+import random
 
-i = iter(l)
+count = int(input('Ведите количество элементов: '))
+elem = 0
+def gen(num):
+    for i in range(num):
+        global elem
+        elem += random.random()
+        print(elem)
 
-print(l)
-print(i)
-# next(l)
-print(next(i))
-print(next(i))
-print(next(i))
-print(next(i))
-print(next(i))
-
-print()
-print(type(l))
-print(type(i))
-
+gen(count)
