@@ -2,7 +2,8 @@
 import random
 elem = 0
 count_num = 1
-def my_list(nums):
+
+class my_list():
     for i in range(nums):
         global elem
         elem += random.random()
