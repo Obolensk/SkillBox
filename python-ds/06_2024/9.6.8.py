@@ -37,3 +37,33 @@ print('Задача 10. Кинотеатр')
 
 boys = int(input('Введите кол-во мальчиков: '))
 girls = int(input('Введите кол-во девочек: '))
+all_sum = boys + girls
+print('all_sum = ', all_sum)
+print('all_sum // 4')
+print(all_sum // 4)
+print()
+
+b = 'BGGB'
+g = 'GBBG'
+
+if abs(boys - girls) > 2:
+    print('Задача не имеет решения!')
+else:
+    if boys >= girls:
+        print(b * (all_sum // 4), end='')
+        if all_sum % 4 == 3:
+            print('BGB')
+        elif all_sum % 4 == 2:
+            print('BG')
+        else:
+            print('G')
+        print()
+    else:
+        print(g * (all_sum // 4), end='')
+        if all_sum % 4 == 3:
+            print('GBG')
+        elif all_sum % 4 == 2:
+            print('GB')
+        else:
+            print('B')
+        print()
