@@ -1,6 +1,6 @@
 
-num_rows = 10
-num_cols = 15
+num_rows = 20
+num_cols = 30
 
 for row in range(num_rows):
     if row == 0:

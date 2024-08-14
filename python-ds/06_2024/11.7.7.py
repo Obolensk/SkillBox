@@ -3,14 +3,13 @@ levels = 4
 level = 0
 count = 1
 
-
-for row in range(levels):
-    for col in range(levels+2):
-        if col + row >= 3:
-            print('#' * col, end='')
+for row in range(levels+2):
+    print()
+    for col in range(levels + 2):
+        if 3 <= (col + row) <= col * 2 - 1:
+            print('#' * row, end='')
         else:
             print(' ', end='')
-    print()
 
 
 #
