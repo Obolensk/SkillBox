@@ -1,6 +1,10 @@
 first = int(input('Введите первое число: '))
 second = int(input('Введите второе число: '))
 
-maximum = (((first + second) * 2) - (first * 2)) - (((first + second) * 2) - (second * 2))
+summ = first + second
+delta = abs(first - second)
+double_min = summ - delta
+minn = double_min / 2
+maximum = summ - minn
 
-print(abs(maximum))
+print('Максимальное число из пары равняется', abs(maximum))
