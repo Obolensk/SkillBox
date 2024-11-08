@@ -1,6 +1,5 @@
 print('Задача 9. Аннуитетный платёж')
 
-
 # Кредит в сумме S млн руб.,
 # выданный на n лет под i% годовых,
 # подлежит погашению равными ежегодными выплатами в конце каждого года,
@@ -77,35 +76,56 @@ print('Задача 9. Аннуитетный платёж')
 #
 # Остаток долга: 0.017039266414940357
 
-def credit(rate, years, s, new_years):
-    i = rate / 100
-    k = (i * (1 + i) ** years) / ((1 + i) ** years - 1)
-    print('k = ', k)
-    a = k * s
-    print('a = ', a)
-    for n in range(1, new_years):
-        print()
-        print('Период:', n)
-        print('Остаток долга на начало периода:', s)
-        print('Выплачено процентов:', s * i)
-        print('Выплачено тела кредита:', a - (s * i))
-        s -= a - (s * i)
-    print()
-    print('Остаток долга:', s)
-    return s
+
+#
+# A = KS
+#
+# K = i(1 + i) ** n / (1 + i) ** n - 1
+
+# S = float(input('Введите сумму кредита: '))
+# n = int(input('На сколько лет выдан? '))
+# i = float(input('Сколько процентов годовых? '))
+#
 
 
-old_s = float(input('Введите сумму кредита: '))
-years = int(input('На сколько лет выдан? '))
-rate = int(input('Сколько процентов годовых? '))
+S = 40e6
+n = 5
+i = 6
+time = 0
 
-s = credit(rate, years, old_s, 4)
+K = (i/100) * (1 + (i/100)) ** n / ((1 + (i/100)) ** n - 1)
+A = round(K * S, 2)
 
-# print('s =',2 s)
-print('\n=====================\n')
+def credit(S, ears, perc):
+    debt = S
+    body = 0
+    for i in range(ears):
+        print('\nПериод:', i + 1)
+        debt -= body
+        percent = debt * (perc / 100)
+        body = A - percent
+        print('Остаток долга на начало периода:', debt)
+        print('Выплачено процентов:', percent)
+        print('Выплачено тела кредита:', body)
+    S = debt - body
+    print('\nОстаток долга:', S)
+    return S
 
-new_years = int(input('На сколько лет продлевается договор? '))
-new_rate = int(input('Увеличение ставки до: '))
 
-credit(new_rate, new_years + years - 3, s, new_years + years - 2)
+credit(S, 3, i)
+S = credit(S, 3, i)
+print()
+print('S = ', S)
 
+print()
+print('n = ', n)
+# n_2 = int(input('На сколько лет продлевается договор? '))
+# i_2 = int(input('Увеличение ставки до: '))
+
+n_2 = 2
+i_2 = 10
+
+K = (i_2/100) * (1 + (i_2/100)) ** (n - 3 + n_2) / ((1 + (i_2/100)) ** (n - 3 + n_2) - 1)
+A = round(K * S, 2)
+
+credit(S, n - 3 + n_2, i_2)
