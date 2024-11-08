@@ -30,14 +30,6 @@ print('Задача 7. Яйца')
 #
 # Приблизительная глубина безопасной кладки: 0.732421875 м
 
-# max_dan = float(input('Введите максимально допустимый уровень опасности: '))
-#
-# def frange(start, stop, step):
-#   i = start
-#   while i < stop:
-#     yield i
-#     i += step
-
 def make_list():
   my_list = []
   item = 0
@@ -46,23 +38,25 @@ def make_list():
     item += 0.001
   return my_list
 
-# print(make_list())
+# print('Глубины = ', make_list())
 
 dangers = []
-goal_deep = 4
+goal_danger = float(input('Введите максимально допустимый уровень опасности: '))
+
 my_dict = {}
 for x in make_list():
   dangers.append(x ** 3 - 3 * x ** 2 - 12 * x + 10)
   my_dict[x] = (x ** 3 - 3 * x ** 2 - 12 * x + 10)
-  if abs(x ** 3 - 3 * x ** 2 - 12 * x + 10) < goal_deep:
-    goal_deep = (x ** 3 - 3 * x ** 2 - 12 * x + 10)
-    goal_danger = x
+  if abs(x ** 3 - 3 * x ** 2 - 12 * x + 10) < goal_danger:
+    goal_danger = (x ** 3 - 3 * x ** 2 - 12 * x + 10)
+    goal_deep = x
 
 
-# print(dangers)
+# print('dangers = ', dangers)
 
-print('goal_deep = ', goal_deep)
-print('goal_danger = ', goal_danger)
+print('Приблизительная глубина безопасной кладки: {} м'.format(goal_deep))
+# print('goal_danger = ', goal_danger)
+
 
 # for i in my_dict:
 #   print('Глубина {} = Опасность {}'.format(i, my_dict[i]))
