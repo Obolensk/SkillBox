@@ -17,3 +17,4 @@ for i in nums_list:
 
 print('Максимальное число в списке:', maximum)
 print('Минимальное число в списке:', minimum)
+
