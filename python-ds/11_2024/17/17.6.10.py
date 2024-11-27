@@ -42,22 +42,21 @@ print()
 #     print(i, end=' ')
 #     print(len(mylist) - i)
 
-while new_list != rev(new_list):
-    for i in range(len(mylist)):
+# while new_list != rev(new_list):
+if new_list != rev(new_list):
+    for i in range(len(mylist)-1):
         new_list = list(mylist)
         added = []
         for a in range(i, -1, -1):
             new_list.append(mylist[a])
             added.append(mylist[a])
             print(a, end=' ')
-        print('\nnew_list = ', new_list)
-        print()
 
 
 print()
 print('Последовательность:', mylist)
 print('Нужно добавить чисел:', len(added))
-# print('\nnew_list = ', new_list)
+print('\nnew_list = ', new_list)
 print('Сами числа:', added)
 
 
