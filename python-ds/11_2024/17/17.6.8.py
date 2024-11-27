@@ -27,7 +27,7 @@ while len(game) != 1:
 
     print('Выбывает человек под номером:', game[(first_count + K - 1) % len(game)])
     game.remove(game[(first_count + K - 1) % len(game)])
-    first_count = game.index(game[(first_count + K - 2) % len(game)])
+    first_count = game.index(game[(abs(first_count + K - 2) % len(game))])
     # first_count += abs(K - 1)
 
 print('\nОстался человек под номером', game[0])
