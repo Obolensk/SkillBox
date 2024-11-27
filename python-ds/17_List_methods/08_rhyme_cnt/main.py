@@ -16,5 +16,6 @@ while len(people_list) > 1:
     index_del = (index_start + drop_number - 1) % len(people_list)
     print('Выбывает человек под номером', people_list[index_del])
     people_list.remove(people_list[index_del])
+    print()
 
 print('\nОстался человек под номером', people_list[0])
