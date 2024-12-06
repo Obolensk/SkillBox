@@ -4,12 +4,18 @@ letters = ["а", "б", "в", "г", "д", "е", "ё", "ж", "з", "и", "й", "к
 
 msg = 'это питон'
 shift = 3
-answer = ''
+# answer = ''
+#
+# for i in range(len(msg)):
+#     if msg[i] == ' ':
+#         answer += ' '
+#     else:
+#         answer += letters[(letters.index(msg[i]) + shift) % len(letters)]
 
-for i in range(len(msg)):
-    if msg[i] == ' ':
-        answer += ' '
-    else:
-        answer += letters[(letters.index(msg[i]) + shift) % len(letters)]
+answer = [' ' if msg[i] == ' ' else letters[(letters.index(msg[i]) + shift) % len(letters)] for i in range(len(msg))]
 
-print('Зашифрованное сообщение:', answer)
+
+print('Зашифрованное сообщение: ', end='')
+
+for let in answer:
+    print(let, end='')
