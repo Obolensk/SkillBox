@@ -8,4 +8,4 @@
 name = input('Введите имя: ')
 debt = input('Номер заказа: ')
 
-print('{}! {}, привет! Как дела, {}? Где мои {} рублей? {}!'.format(name, name, name, debt, name))
+print('{n}! {n}, привет! Как дела, {n}? Где мои {d} рублей? {n}!'.format(n = name, d = debt))
