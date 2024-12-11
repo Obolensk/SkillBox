@@ -13,16 +13,19 @@ while True:
     print('Ошибка шаблона, отсутствует конструкция {ip}')
 
 eventual_ip = []
-
-for i in range(4):
+ip = 0
+while len(eventual_ip) < 4:
     ip = int(input('Ведите число от 0 до 255 (включительно): '))
-    eventual_ip.append(ip)
+    if 0 <= ip <= 255:
+        eventual_ip.append(ip)
+    else:
+        print('Внимание, ошибка!!!')
+        ip = int(input('Ведите число от 0 до 255 (включительно): '))
 
 print('eventual_ip = ', eventual_ip)
 
 for i in eventual_ip:
-    ip_address = ip_address.format(ip=i)
-    print(ip_address)
+   print(ip_address.format(ip=i), end='.')
 
 
 
