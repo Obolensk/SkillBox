@@ -14,6 +14,7 @@ shift = 3
 
 answer = [' ' if msg[i] == ' ' else letters[(letters.index(msg[i]) + shift) % len(letters)] for i in range(len(msg))]
 
+print(answer)
 
 print('Зашифрованное сообщение: ', end='')
 
