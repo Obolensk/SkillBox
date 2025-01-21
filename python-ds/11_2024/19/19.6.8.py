@@ -16,20 +16,17 @@ for i in str_2:
 print(new_str_1)
 print(new_str_2)
 print()
-# a = 1
-#
-# for i in range(len(new_str_1)):
-#     list.append(new_str_1[(i + a)%len(new_str_1)])
 
 print(list)
 print('\nНачинаем вложенные циклы!')
-for shift in range(len(new_str_1)):
-    for i in range(len(new_str_1)):
+for shift in range(4):
+    for i in range(4):
         list.append(new_str_1[(i + shift) % len(new_str_1)])
         print(list)
-    if list == new_str_1:
+    if list == new_str_2:
         print('Первая строка получается из второй со сдвигом', shift)
         break
+    list = []
 
 
 
