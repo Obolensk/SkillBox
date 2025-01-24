@@ -1,6 +1,6 @@
 
-str_1 = 'abcd'
-str_2 = 'cdab'
+str_1 = 'abcdef'
+str_2 = 'fabcde'
 new_str_1 = []
 new_str_2 = []
 list = []
@@ -19,8 +19,8 @@ print()
 
 print(list)
 print('\nНачинаем вложенные циклы!')
-for shift in range(4):
-    for i in range(4):
+for shift in range(len(new_str_1)):
+    for i in range(len(new_str_1)):
         list.append(new_str_1[(i + shift) % len(new_str_1)])
         print(list)
     if list == new_str_2:
