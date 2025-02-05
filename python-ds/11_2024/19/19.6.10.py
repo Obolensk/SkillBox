@@ -27,6 +27,8 @@ for i in text:
     elif i in abc:
         # print(text.index(i))
         new_text.append(abc[(abc.index(i) + shift) % len(abc)])
+    # elif i == '/':
+    #     new_text.append('\n')
     else:
         new_text.append(i)
     # print(new_text)
