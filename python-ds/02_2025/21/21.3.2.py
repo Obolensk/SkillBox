@@ -3,8 +3,8 @@ second = ['д', 'а', 'а', 'в', 'т', 'ж', 'р', 'б', 'й', 'р']
 
 def make_dict(my_list):
     my_dict = dict()
-    for item in enumerate(my_list):
-        my_dict[item[0]] = item[1]
+    for index, item in enumerate(my_list):
+        my_dict[index] = item
     return my_dict
 
 print('Первый словарь:', make_dict(first))
