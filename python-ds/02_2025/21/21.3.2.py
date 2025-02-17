@@ -1,9 +1,6 @@
 first = ['й', 'р', 'с', 'г', 'а', 'а', 'т', 'ж', 'е', 'к']
 second = ['д', 'а', 'а', 'в', 'т', 'ж', 'р', 'б', 'й', 'р']
 
-# first_dict = dict()
-# second_dict = dict()
-
 def make_dict(my_list):
     my_dict = dict()
     for item in enumerate(my_list):
