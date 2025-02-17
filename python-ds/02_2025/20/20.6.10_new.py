@@ -72,7 +72,7 @@ def is_palindrome(string):
     return string == string[::-1]  # Упрощенная проверка на палиндром
 
 
-before = 'aab'
+before = 'aabc'
 start_len = len(before)
 found = False
 
