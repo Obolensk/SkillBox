@@ -1,16 +1,21 @@
 
-import random
 
-def change(nums):
-    index = random.randint(0, 4)
-    value = random.randint(100, 1000)
-    nums[index] = value
-    return nums, value
+tup = (1, 2, 'три', 'IV', 3, ['f', 0], 2, 't')
 
-my_nums = [1, 2, 3, 4, 5]
+def func(col, sym):
+    lst = []
+    count = 0
+    for item in col:
+        if item == sym:
+            count += 1
+        # print('item = ', item)
+        # print('count = ', count)
+        if count == 1 or item == sym:
+            lst.append(item)
+    return tuple(lst)
 
-new_nums, rand_val = change(my_nums)
-print(new_nums, rand_val)
-new_nums = change(new_nums)
-# rand_val += change(new_nums)
-print(new_nums, rand_val)
+print(func(tup, 2))
+print(func(tup, 3))
+
+
+
