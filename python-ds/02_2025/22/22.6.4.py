@@ -21,9 +21,13 @@ find_key = input('Введите искомый ключ: ')
 def finder(struct, key):
     if key in struct:
         return struct[key]
+
     for keys in struct.values():
-        print(struct.values())
-        finder(keys, key)
+        if isinstance(keys, dict):
+            return finder(keys, key)
+        else:
+            break
+
 
 
 
