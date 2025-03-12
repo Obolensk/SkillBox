@@ -10,5 +10,5 @@ def disc(n, a, b, c):
       print('Диск {} со стержня {} на стержень {}'.format(n, a, b))
       disc(n-1, c, b, a)
           
-disc(5, 1, 3, 2)
+disc(2, 1, 3, 2)
 
