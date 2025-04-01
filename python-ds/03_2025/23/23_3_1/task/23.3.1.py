@@ -20,7 +20,10 @@ file.close()
 
 print(diff)
 #
-file_2 = open('C:/Users/e.menshaev/PycharmProjects/SkillBox/python-ds/03_2025/23/23_3_1/task/Additional_info/group_2.txt', 'r', encoding='utf-8')
+file_2 = open(
+    'C:/Users/e.menshaev/PycharmProjects/SkillBox/python-ds/03_2025/23/23_3_1/task/Additional_info/group_2.txt',
+    'r',
+    encoding='utf-8')
 compose = 1
 
 for i_line in file_2:
