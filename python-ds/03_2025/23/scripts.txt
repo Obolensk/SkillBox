@@ -1,0 +1,549 @@
+
+def factorial(num):
+    res = 1
+    for i in range(1, num + 1):
+        res *= i
+    return res
+
+print(factorial(5))
+
+
+def rec_fact(n):
+    if n == 1:
+        return 1
+    return n * rec_fact(n - 1)
+
+print()
+print(rec_fact(5))
+
+
+              **************************
+
+
+
+def power(a, n):
+    if n == 1:
+        return a
+    return a * power(a, n-1)
+
+float_num = float(input('Введите вещественное число: '))
+int_num = int(input('Введите степень числа: '))
+print(float_num, '**', int_num, '=', power(float_num, int_num))
+
+
+
+
+              **************************
+
+
+
+site = {
+    'html': {
+        'head': {
+            'title': 'Мой сайт'
+        },
+        'body': {
+            'h2': 'Здесь будет мой заголовок',
+            'div': 'Тут, наверное, какой-то блок',
+            'p': 'А вот здесь новый абзац'
+        }
+    }
+}
+
+print(site)
+
+def find_key(key, dct):
+    if key in dct:
+        return dct[key]
+    for value in dct.values():
+        if isinstance(value, dict):
+            res = find_key(key, value)
+            if res:
+                break
+    else:
+        res = None
+
+    return res
+
+
+
+my_key = input('Искомый ключ: ')
+
+print('Значение {}'.format(find_key(my_key, site)))
+
+
+              **************************
+
+
+import random
+import copy
+
+
+def change_dict(dct):
+    num = random.randint(1, 100)
+    new_dct = copy.deepcopy(dct)
+    for i_key, i_value in dct.items():
+        if isinstance(i_value, list):
+            i_value.append(num)
+        if isinstance(i_value, dict):
+            i_value[num] = i_key
+        if isinstance(i_value, set):
+            i_value.add(num)
+    return new_dct
+
+
+nums_list = [1, 2, 3]
+some_dict = {1: 'text', 2: 'another text'}
+uniq_nums = {1, 2, 3}
+common_dict = {1: nums_list[:], 2: some_dict.copy(), 3: uniq_nums.copy(), 4: (10, 20, 30)}
+
+change_dict(common_dict)
+print(common_dict)
+print('----------------------------------------')
+print()
+for k, v in common_dict.items():
+    print('{}: {}'.format(k, v))
+
+print()
+print(list(nums_list))
+print(some_dict)
+print(uniq_nums)
+
+
+
+              **************************
+
+
+from Lib.test.test_pyrepl.support import multiline_input
+
+data_input = {"a": 10, "b": 20}
+tp = type(data_input)
+if isinstance(data_input, str):
+    desc = '(строка)'
+    mute = 'Неизменяемый (immutable)'
+if isinstance(data_input, list):
+    desc = '(список)'
+    mute = 'Изменяемый (mutable)'
+if isinstance(data_input, int):
+    desc = '(целое число)'
+    mute = 'Неизменяемый (immutable)'
+if isinstance(data_input,float):
+    desc = '(вещественное число)'
+    mute = 'Неизменяемый (immutable)'
+if isinstance(data_input, dict):
+    desc = '(словарь)'
+    mute = 'Изменяемый (mutable)'
+if isinstance(data_input, tuple):
+    desc = '(кортеж)'
+    mute = 'Неизменяемый (immutable)'
+
+
+print('data_input = "{}"'.format(data_input))
+print('Тип данных: {} {}'.format(type(data_input), desc))
+print(mute)
+print('id объекта: ', id(data_input))
+
+
+
+
+              **************************
+
+
+
+def get_question(question,
+                 message='Неверный ввод. Пожалуйста, введите "да" или "нет".',
+                 retries=3):
+    ask = input(question)
+    if ask == 'да':
+        retries -= 1
+        print('Осталось попыток:', retries)
+    elif ask == 'нет':
+        retries -= 1
+        print('Осталось попыток:', retries)
+    else:
+        print(message)
+        retries -= 1
+        print('Осталось попыток:', retries)
+
+
+get_question('Вы действительно хотите выйти? ')
+get_question('Удалить файл? ', 'НЕПРАВИЛЬНО!!!!')
+get_question('Записать файл?  ', retries=10)
+
+
+
+
+
+              **************************
+
+
+
+def add_num(a, lst = None):
+    lst = []
+    lst.append(a)
+    print(lst)
+
+
+add_num(5)
+add_num(10)
+add_num(15)
+
+
+              **************************
+
+
+
+def create_dict(data):
+    template = {}
+    if isinstance(data, dict):
+        return data
+    elif isinstance(data, int) or isinstance(data, float) or isinstance(data, str):
+        template[data] = data
+        return template
+
+
+def data_preparation(old_list):
+    new_list = []
+    for i_element in old_list:
+        new_list.append(create_dict(i_element))
+    print('new_list = ', new_list)
+    print('Первая итерация цикла')
+    for elem in new_list:
+        print('Полный список элементов', elem)
+        print(isinstance(elem, dict))
+        if not isinstance(elem, dict):
+            print('Удаляем элемент', elem)
+            print(isinstance(elem, dict))
+            new_list.remove(elem)
+    print('new_list = ', new_list)
+    print('Вторая итерация цикла')
+    for elem in new_list:
+        print('Полный список элементов', elem)
+        print(isinstance(elem, dict))
+        if not isinstance(elem, dict):
+            print(isinstance(elem, dict))
+            print('Удаляем элемент', elem)
+            new_list.remove(elem)
+    print('new_list = ', new_list)
+    return new_list
+
+data = ['sad', {'sds': 23}, {43}, [12, 42, 1], 2323]
+
+
+print()
+for i in data:
+    print('\nДля аргумента i = {}, create_dict(i) = {}'.format(i, create_dict(i)))
+
+print()
+print(create_dict(7878))
+print()
+print(data_preparation(data))
+
+
+
+
+
+
+              **************************
+
+
+
+num = int(input('Введите num: '))
+
+def func(num):
+    if num != 0:
+        print(num)
+        num -= 1
+        func(num)
+
+func(num)
+print()
+
+def rev_func(num, a = 1):
+    if a != num + 1:
+        print(a)
+        a += 1
+        rev_func(num, a)
+
+rev_func(num)
+
+
+              **************************
+
+
+print('\n Task 1')
+
+string = 'abcd'
+tup = (10, 20, 30, 40)
+
+print(zip(string, tup))
+
+for item in zip(string, tup):
+    print(item)
+
+print('\n Task 2')
+
+
+def my_zip(col_1, col_2):
+    lst = [(col_1[i], col_2[i]) for i in range(min(len(col_1), len(col_2)))]
+    return lst
+
+
+f = ('а', 'б', 'в', 'г', 'д', 'е', 'ж')
+s = '123456789'
+
+print(my_zip(f, s))
+
+
+
+
+
+              **************************
+
+
+# 1, 1, 2, 3, 5, 8, 13, 21, 34, 55...
+
+
+num_pos = int(input('Введите позицию числа в ряде Фибоначчи: '))
+
+
+def fibo_func(fibo_len):
+    fibo = [1, 1]
+    for i in range(1, fibo_len):
+        fibo.append(fibo[i] + fibo[i-1])
+    return fibo[fibo_len]
+
+
+print(fibo_func(num_pos-1))
+
+
+
+
+
+              **************************
+
+
+site = {
+    'html': {
+        'head': {
+            'title': 'Мой сайт'
+        },
+        'body': {
+            'h2': 'Здесь будет мой заголовок',
+            'div': 'Тут, наверное, какой-то блок',
+            'p': 'А вот здесь новый абзац'
+        }
+    }
+}
+
+print(site)
+print('html' in site)
+print()
+
+find_key = input('Введите искомый ключ: ')
+
+
+def finder(struct, key):
+    if key in struct:
+        return struct[key]
+
+    for keys in struct.values():
+        if isinstance(keys, dict):
+            return finder(keys, key)
+        else:
+            break
+
+
+
+
+print(finder(site, find_key))
+
+
+              **************************
+
+
+#
+# def calculating_math_func(data):
+#     result = 1
+#     for index in range(1, data + 1):
+#         result *= index
+#     result /= data ** 3
+#     result = result ** 10
+#     return result
+#
+# print(calculating_math_func(30))
+
+#
+def factorial(num):
+    if num == 1:
+        return 1
+    else:
+        return num * factorial(num-1)
+
+
+def new_func(data):
+    return (factorial(data) / data ** 3) ** 10
+
+print(new_func(30))
+
+
+
+
+              **************************
+
+
+
+site = {
+    'html': {
+        'head': {
+            'title': 'Куплю/продам iPhone недорого'
+        },
+        'body': {
+            'h2': 'У нас самая низкая цена на iPhone',
+            'div': 'Купить',
+            'p': 'Продать'
+        }
+    }
+}
+
+print(site)
+
+
+def new_site(phone):
+    my_site = {
+        'html': {
+            'head': {
+                'title': 'Куплю/продам {} недорого'.format(phone)
+            },
+            'body': {
+                'h2': 'У нас самая низкая цена на {}'.format(phone),
+                'div': 'Купить',
+                'p': 'Продать'
+            }
+        }
+    }
+    print(my_site)
+
+new_site('SAMSUNG')
+
+site_num = int(input('Сколько будет сайтов? '))
+
+for sites in range(site_num):
+    new_phone = input('Введите название продукта для нового сайта: ')
+    new_site(new_phone)
+
+
+
+
+
+              **************************
+
+
+
+def my_sum(*args):
+    sum = 0
+    for elem in args:
+        if isinstance(elem, list) or isinstance(elem, tuple):
+            for i in elem:
+                sum += i
+        else:
+            sum += elem
+    return sum
+
+
+
+
+
+print(my_sum([1, 2], [3, 4], (5, 7), 10, 32.0))
+
+
+              **************************
+
+
+
+nice_list = [1, 2, [3, 4], [[5, 6, 7], [8, 9, 10]], [[11, 12, 13], [14, 15], [16, 17, 18]]]
+
+
+
+lst = []
+
+def unzip(seq):
+    for elem in seq:
+        if isinstance(elem, list):
+            unzip(elem)
+        else:
+            lst.append(elem)
+    return lst
+
+print(unzip(nice_list))
+
+
+
+
+
+
+              **************************
+
+
+
+
+def move(n, x=1, y=3):
+    lst_1 = [i+1 for i in range(n)]
+    lst_2 = []
+    lst_3 = []
+    print('lst_1 = ', lst_1, end=' / ')
+    print('lst_2 = ', lst_2, end=' / ')
+    print('lst_3 = ', lst_3)
+    print('Задача переместить {} дисков со стрежня {} на стержень {}'.format(n, x, y))
+    lst_2.append(lst_1[-1])
+    lst_1.remove(lst_1[-1])
+    lst_3.append(lst_1[-1])
+    lst_1.remove(lst_1[-1])
+    lst_3.append(lst_2[-1])
+    lst_2.remove(lst_2[-1])
+    print('lst_1 = ', lst_1, end=' / ')
+    print('lst_2 = ', lst_2, end=' / ')
+    print('lst_3 = ', lst_3)
+
+
+
+
+# n = int(input('Введите количество дисков: '))
+n = 3
+
+move(n)
+
+
+              **************************
+
+
+#
+# def move(n, start=1, final=3, prom=2):
+#     if n == 1:
+#         print('Переложить диск 1 со стержня номер {} на стержень номер {}'.format(start, final))
+#     else:
+#         move(n-1)
+#         print('Переложить диск {} со стержня номер {} на стержень номер {}'.format(n, start, prom))
+#         move(n-1, final, prom)
+#
+#
+#
+# move(2)
+
+
+def disc(n, start, final, prom):
+    if n == 1:
+        print('\nДиск 1 со стержня {} на стержень {}'.format(start, final))
+        return
+    else:
+        disc(n - 1, start, prom, final)
+        print('Диск {} со стержня {} на стержень {}'.format(n, start, final))
+        disc(n - 1, prom, final, start)
+
+
+disc(3, 1, 3, 2)
+
+
+              **************************
+
+
